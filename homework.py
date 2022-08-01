@@ -77,10 +77,11 @@ class SportsWalking(Training):
     WLK_COEFF_2: float = 0.029
 
     def __init__(self,
-                 action: int,
-                 duration: float,
-                 weight: float,
-                 height: float) -> None:
+                 action,
+                 duration,
+                 weight,
+                 height
+                 ) -> None:
         super().__init__(action, duration, weight)
         self.height = height
 
