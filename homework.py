@@ -66,7 +66,8 @@ class Running(Training):
 
     def get_spent_calories(self) -> float:
         # noinspection TaskProblemsInspection
-        return (self.RUN_COEFF_1 * self.get_mean_speed() -
+        return (self.RUN_COEFF_1
+                * self.get_mean_speed() -
                 self.RUN_COEFF_2) * self.weight / self.M_IN_KM * self.duration * 60
 
 
@@ -87,7 +88,8 @@ class SportsWalking(Training):
 
     def get_spent_calories(self) -> float:
         # noinspection TaskProblemsInspection
-        return (self.WLK_COEFF_1 * self.weight + (self.get_mean_speed() ** 2 // self.height)
+        return (self.WLK_COEFF_1 * self.weight +
+                (self.get_mean_speed() ** 2 // self.height)
                 * self.WLK_COEFF_2 * self.weight) * 60 * self.duration
 
 
