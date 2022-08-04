@@ -47,7 +47,8 @@ class Training:
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-        raise NotImplementedError(f'Метод get_spent_calories в классе {self.training_type} '
+        raise NotImplementedError(
+            f'Метод get_spent_calories в классе {self.training_type} '
             f'необходимо определить каллории')
 
     def show_training_info(self) -> InfoMessage:
@@ -94,7 +95,6 @@ class SportsWalking(Training):
 
         return (weight_coeff_1 + mean_speed
                 * weight_coeff_2) * self.duration_h * self.duration
-
 
 
 class Swimming(Training):
