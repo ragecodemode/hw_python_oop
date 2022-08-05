@@ -26,16 +26,16 @@ class Training:
 
     LEN_STEP: float = 0.65
     M_IN_KM: int = 1000
-    duration_h: int = 60
+    MIN_IN_H: int = 60
 
     def __init__(self,
                  action: int,
                  duration: float,
                  weight: float,
                  ) -> None:
-        self.action = action
-        self.duration = duration
-        self.weight = weight
+        self.action: int = action
+        self.duration: float = duration
+        self.weight: float = weight
 
     def get_distance(self) -> float:
         """Получить дистанцию в км."""
@@ -48,7 +48,7 @@ class Training:
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
         raise NotImplementedError(
-            f'Метод get_spent_calories в классе {self.training_type} '
+            f'Метод get_spent_calories в классе {type(self).__name__} '
             f'необходимо определить каллории')
 
     def show_training_info(self) -> InfoMessage:
@@ -70,7 +70,7 @@ class Running(Training):
     def get_spent_calories(self) -> float:
         spent_caloreis = (self.RUN_COEFF_1 * self.get_mean_speed()
                           - self.RUN_COEFF_2) * self.weight
-        return spent_caloreis / self.M_IN_KM * self.duration * self.duration_h
+        return spent_caloreis / self.M_IN_KM * self.duration * self.MIN_IN_H
 
 
 class SportsWalking(Training):
@@ -86,7 +86,7 @@ class SportsWalking(Training):
                  height: float
                  ) -> None:
         super().__init__(action, duration, weight)
-        self.height = height
+        self.height: float = height
 
     def get_spent_calories(self) -> float:
         weight_coeff_1 = self.WLK_COEFF_1 * self.weight
@@ -94,7 +94,7 @@ class SportsWalking(Training):
         mean_speed = ((self.get_mean_speed() ** 2) // self.height)
 
         return (weight_coeff_1 + mean_speed
-                * weight_coeff_2) * self.duration_h * self.duration
+                * weight_coeff_2) * self.MIN_IN_H * self.duration
 
 
 class Swimming(Training):
@@ -112,8 +112,8 @@ class Swimming(Training):
                  count_pool: float
                  ) -> None:
         super().__init__(action, duration, weight)
-        self.length_pool = length_pool
-        self.count_pool = count_pool
+        self.length_pool: float = length_pool
+        self.count_pool: float = count_pool
 
     def get_distance(self) -> float:
         """Расстояние в бассейне"""
